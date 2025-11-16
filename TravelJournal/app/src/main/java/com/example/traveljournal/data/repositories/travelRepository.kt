@@ -23,4 +23,7 @@ object travelRepository {
     fun getAllTravels(): List<Travel> {
         return list
     }
+    fun addTravels(newTravel: Travel){
+        list.add(newTravel)
+    }
 }

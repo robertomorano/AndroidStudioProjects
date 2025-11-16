@@ -23,5 +23,8 @@ object contactRepository {
     fun getAllContacts(): List<Contact> {
         return list
     }
+    fun addContact(newContact: Contact){
+        list.add(newContact)
+    }
 
 }

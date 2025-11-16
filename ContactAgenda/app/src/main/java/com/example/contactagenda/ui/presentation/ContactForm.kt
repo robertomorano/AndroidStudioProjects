@@ -15,12 +15,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.navigation.NavController
+import com.example.contactagenda.data.repositories.contactRepository
+import com.example.contactagenda.domain.entities.Contact
 
 @Composable
 fun ContactForm(navController: NavController){
     var name by remember{ mutableStateOf("") }
     var tlf by remember{ mutableStateOf("") }
-    var gender by remember { mutableStateOf(0) }
+    var gender by remember { mutableStateOf("") }
     var checked by remember { mutableStateOf(false) }
     Column (){
         TextField(value = name,
@@ -29,43 +31,48 @@ fun ContactForm(navController: NavController){
         TextField(value = tlf,
             onValueChange = {newName -> tlf = newName})
         Row {
-            Text("")
+            Text("Otro")
             Checkbox(
-                checked = gender == 0,
+                checked = gender == "O",
                 onCheckedChange =
                 {
                     checked = !checked
                     if(checked){
-                        gender = 0
+                        gender = "O"
                     }
                 }
 
             )
+            Text("Masculino")
             Checkbox(
-                checked = gender == 1,
+                checked = gender == "M",
                 onCheckedChange =
                     {
                         checked = !checked
                         if(checked){
-                            gender = 1
+                            gender = "M"
                         }
                     }
 
             )
+            Text("Femenino")
             Checkbox(
-                checked = gender == 2,
+                checked = gender == "F",
                 onCheckedChange =
                     {
                         checked = !checked
                         if(checked){
-                            gender = 2
+                            gender = "F"
                         }
                     }
 
             )
         }
-        /*Button(onClick = ) {
+        Button(onClick = {
+            var contact = Contact(id = 0 ,name=name, phoneNumber = tlf, gender = gender)
+            contactRepository.addContact(contact)
+        } ) {
             Text("Guardar")
-        }*/
+        }
     }
 }
