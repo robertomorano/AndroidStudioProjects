@@ -24,14 +24,24 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.room.Room
+import com.example.contactagenda.data.database.ContactDatabase
 import com.example.contactagenda.ui.presentation.ContactForm
 import com.example.contactagenda.ui.presentation.ContactsScreen
 import com.example.contactagenda.ui.presentation.Setting
 import com.example.contactagenda.ui.theme.ContactAgendaTheme
 
 class MainActivity : ComponentActivity() {
+    companion object{
+        lateinit var database: ContactDatabase
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        database = Room.databaseBuilder(
+            this,
+            ContactDatabase::class.java,
+            "contact-db"
+        ).build()
         enableEdgeToEdge()
         setContent {
             val navController = rememberNavController()

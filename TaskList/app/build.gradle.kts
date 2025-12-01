@@ -6,16 +6,16 @@ plugins {
     alias(libs.plugins.androidxRoom)
 
 }
-room {	/* Después de plugins, antes del bloque android */
+room {
     schemaDirectory("$projectDir/schemas")
 }
 
 android {
-    namespace = "com.example.contactagenda"
+    namespace = "com.example.tasklist"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.contactagenda"
+        applicationId = "com.example.tasklist"
         minSdk = 30
         targetSdk = 36
         versionCode = 1
