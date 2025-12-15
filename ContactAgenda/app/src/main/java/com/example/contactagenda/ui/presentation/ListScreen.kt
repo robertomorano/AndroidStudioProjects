@@ -1,7 +1,5 @@
 package com.example.contactagenda.ui.presentation
 
-import android.service.autofill.OnClickAction
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -13,26 +11,28 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.keepScreenOn
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.contactagenda.MainActivity
 import com.example.contactagenda.R
-import com.example.contactagenda.data.repositories.contactRepository
+import com.example.contactagenda.data.database.ContactDatabase
 
 import com.example.contactagenda.domain.entities.Contact
+import kotlinx.coroutines.flow.MutableStateFlow
 
 @Composable
 fun ContactRow(contacto: Contact) {
@@ -100,7 +100,15 @@ fun getCapital(name: String): String {
 
 @Composable
 fun ContactsScreen(navController: NavController, modifier: Modifier = Modifier) {
-    val list = contactRepository.getAllContacts()
+    val list = remember { mutableStateListOf<Contact>() }
+
+    LaunchedEffect(Unit) {
+        val listDB = MainActivity.database.ContactDao().getAllContact()
+        list.clear()
+        list.addAll(listDB)
+    }
+
+
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         LazyColumn(modifier = Modifier.padding(innerPadding)) {    // Scroll vertical,
             items(list) { itemContact ->
@@ -114,9 +122,11 @@ fun ContactsScreen(navController: NavController, modifier: Modifier = Modifier) 
         }
         FloatingActionButton(
             onClick = {
-                navController.navigate("add") }
-        ) {Text("+")}
+                navController.navigate("add")
+            }
+        ) { Text("+") }
     }
 }
+
 
 

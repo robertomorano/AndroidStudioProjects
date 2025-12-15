@@ -11,6 +11,7 @@ composeBom = "2024.09.00"
 navigationCompose = "2.9.5"
 ksp = "2.1.20-2.0.1"		# Busca la versión de Kotlin (1er bloque)
 androidx-room = "2.8.4"
+lifecycleViewmodelKtx = "2.10.0"
 
 
 [libraries]
@@ -32,6 +33,7 @@ androidx-navigation-compose = { group = "androidx.navigation", name = "navigatio
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidx-room" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidx-room" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "androidx-room" }
+androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 
 
 [plugins]
