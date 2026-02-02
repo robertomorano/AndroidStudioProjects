@@ -47,6 +47,8 @@ fun Reservas(navController: NavController, hotelViewModel: HotelVM) {
 
     val tiempoActual = 50 // Simulación para comparar con reserva.final
 
+
+
     LazyColumn(
         modifier = Modifier.fillMaxSize().padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
