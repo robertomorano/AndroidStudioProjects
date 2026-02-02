@@ -27,7 +27,7 @@ import kotlin.getValue
 
 class MainActivity : ComponentActivity() {
 
-    private val CVViewModel: CompraVentaVM by viewModels()
+        private val CVViewModel: CompraVentaVM by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
